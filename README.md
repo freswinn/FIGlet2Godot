@@ -17,15 +17,17 @@ More details to follow as this project progresses. Currently it is in a state th
 # FIGlet Installation
 FIGlet is a piece of software that has existed for decades in one form or another, created to generate large block text out of ASCII characters. See [http://www.figlet.org/](http://www.figlet.org) for details on FIGlet.
 
-## Linux
-Installing FIGlet on Linux ix very straightforward. You can probably find it on your distro's package manager, but you can also just type `sudo apt install figlet` in the console.
+## FIGlet: Linux
+Installing **FIGlet** on Linux ix very straightforward. You can probably find it on your distro's package manager, but you can also just type `sudo apt install figlet` in the console.
 
-The official website of this version of FIGlet is the same as the one listed above: <give website here>
+The official website of this version of FIGlet is the same as the one listed above: [http://www.figlet.org/](http://www.figlet.org)
 
-## Windows
-I know of two versions of FIGlet that work on Windows, but I've only had one work in such a way that I've managed to get is output through Godot's `OS.execute()` method. Therefore, the one I recommend is pyfiglet.
+## pyfiglet: Windows and Linux
+I know of two versions of FIGlet that work on Windows, but I've only had one work in such a way that I've managed to get is output through Godot's `OS.execute()` method. Therefore, I have to recommend pyfiglet for Windows.
 
-To acquire and use pyfiglet, You must have an installation of Python 3 (I'm assuming you'll just wanna get the most recent one). Once installed, go to your Command Prompt and type `pip install pyfiglet` to install pyfiglet.
+To acquire and use pyfiglet in Windows, you must have an installation of Python 3 (I'm assuming you'll just wanna get the most recent one). Once installed, go to your Command Prompt and type `pip install pyfiglet` to install pyfiglet.
+
+To install it on Linux, you will have to use `sudo apt python3-pyfiglet` in the console.
 
 The official website of pyfiglet is [https://pypi.org/project/pyfiglet/]([url](https://pypi.org/project/pyfiglet/)).
 
@@ -33,10 +35,8 @@ The official website of pyfiglet is [https://pypi.org/project/pyfiglet/]([url](h
 
 This is not a complete tutorial on using FIGlet, just a very quick way to test that it's working on your computer.
 
-**Linux (figlet):** To test that the installation is successful, type `figlet Hi!` into the console and you should get a block letter "Hi!" in return.
+Open your console or Command Prompt, and type `figlet hi` or `pyfiglet hi` (depending on which one you have installed on your computer). If it pops up, you're golden!
 
-**Windows (pyfiglet):** To test that the installation is successful, type `pyfiglet Hi!` into Command Prompt and you should get a block letter "Hi!" in return.
-
-If you use FIGlet in the console/command prompt but can't seem to get out of it, hit `Ctrl+C` to terminate the process.
+If you try this and then can't seem to get out of it, hit `Ctrl+C` to terminate the process.
 
 On the official websites, you will find a guide, wiki, or manpage to help learn how to use FIGlet. The hope is that, once installed, none of the manpage stuff is actually necessary to be able to use my plugin for yourself.
