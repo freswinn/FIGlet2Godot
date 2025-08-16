@@ -47,7 +47,7 @@ func write_to_window():
 	var figlet_exec : String = "figlet"
 	var figlet_input : String = input_text
 	var out : Array = []
-	var exit_code = OS.execute(figlet_exec, [figlet_input, "-f", "Terrace", "-w 120"], out)
+	var exit_code = OS.execute(figlet_exec, [figlet_input, "-w 120"], out)
 	#var exit_code = OS.execute(figlet_exec, [figlet_input, "-f Terrace"], out) #intentionally-wrong setup, for testing
 	if exit_code == -1:
 		%Output.text = '''ERROR: exit_code == -1. Could not run FIGlet. Make sure FIGlet or pyFIGlet are actually installed, and make sure the executable is set for the appropriate version of FIGlet you are using.'''
