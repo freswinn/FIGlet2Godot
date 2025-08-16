@@ -29,7 +29,7 @@ To acquire and use pyfiglet, You must have an installation of Python 3 (I'm assu
 
 The official website of pyfiglet is [https://pypi.org/project/pyfiglet/]([url](https://pypi.org/project/pyfiglet/)).
 
-# Using FIGlet
+# Check FIGlet Installation
 
 This is not a complete tutorial on using FIGlet, just a very quick way to test that it's working on your computer.
 
