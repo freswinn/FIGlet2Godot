@@ -31,7 +31,7 @@ To acquire and use pyfiglet in Windows, you must have an installation of Python 
 
 To install it on Linux, you will have to use `sudo apt python3-pyfiglet` in the console.
 
-The official website of pyfiglet is [https://pypi.org/project/pyfiglet/]([url](https://pypi.org/project/pyfiglet/)).
+The official website of pyfiglet is [https://pypi.org/project/pyfiglet/](https://pypi.org/project/pyfiglet/).
 
 # Check FIGlet Installation
 
@@ -44,7 +44,9 @@ If you try this and then can't seem to get out of it, hit `Ctrl+C` to terminate 
 On the official websites, you will find a guide, wiki, or manpage to help learn how to use FIGlet. The hope is that, once installed, none of the manpage stuff is actually necessary to be able to use my plugin for yourself.
 
 ### Fonts on FIGlet
-By default, the fonts installed for FIGlet are at `/usr/shared/figlet`. If that doesn't work, type `figlet -I 2` to get the font folder that FIGlet is set up for.
+By default, the fonts installed for FIGlet are at `/usr/shared/figlet`. If that doesn't work, type `figlet -I 2` to get the directory that FIGlet is set up for.
+
+Installing fonts for FIGlet simply involves opening that directory as root and moving the new font file into it.
 
 ### Fonts on pyfiglet:
 On Linux, pyfiglet uses the same location for fonts that FIGlet does: `usr/shared/figlet`. To install a font, you access this folder as root and move the font files into the folder.
