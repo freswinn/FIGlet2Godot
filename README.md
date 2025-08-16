@@ -24,9 +24,6 @@ Installing **FIGlet** on Linux ix very straightforward. You can probably find it
 
 The official website of this version of FIGlet is the same as the one listed above: [http://www.figlet.org/](http://www.figlet.org)
 
-### Fonts on FIGlet:
-By default, the fonts installed for FIGlet are at `/usr/shared/figlet`. If that doesn't work, type `figlet -I 2` to get the font folder that FIGlet is set up for.
-
 ## pyfiglet: Windows and Linux
 I know of two versions of FIGlet that work on Windows, but I've only had one work in such a way that I've managed to get is output through Godot's `OS.execute()` method. Therefore, I have to recommend pyfiglet for Windows.
 
@@ -35,11 +32,6 @@ To acquire and use pyfiglet in Windows, you must have an installation of Python 
 To install it on Linux, you will have to use `sudo apt python3-pyfiglet` in the console.
 
 The official website of pyfiglet is [https://pypi.org/project/pyfiglet/]([url](https://pypi.org/project/pyfiglet/)).
-
-### Fonts on pyfiglet:
-On Linux, pyfiglet uses the same location for fonts that FIGlet does: `usr/shared/figlet`. To install a font, you access this folder as root and move the font files into the folder.
-
-I am not actually sure where they are located on Windows, but you can view a list of the installed fonts in pyfiglet by typing `pyfiglet -l`. You can also install a font in pyfiglet by using `pyfiglet -L <filepath>`
 
 # Check FIGlet Installation
 
@@ -50,3 +42,11 @@ Open your console or Command Prompt, and type `figlet hi` or `pyfiglet hi` (depe
 If you try this and then can't seem to get out of it, hit `Ctrl+C` to terminate the process.
 
 On the official websites, you will find a guide, wiki, or manpage to help learn how to use FIGlet. The hope is that, once installed, none of the manpage stuff is actually necessary to be able to use my plugin for yourself.
+
+### Fonts on FIGlet
+By default, the fonts installed for FIGlet are at `/usr/shared/figlet`. If that doesn't work, type `figlet -I 2` to get the font folder that FIGlet is set up for.
+
+### Fonts on pyfiglet:
+On Linux, pyfiglet uses the same location for fonts that FIGlet does: `usr/shared/figlet`. To install a font, you access this folder as root and move the font files into the folder.
+
+I am not actually sure where they are located on Windows, but you can view a list of the installed fonts in pyfiglet by typing `pyfiglet -l`. You can also install a font in pyfiglet by using `pyfiglet -L <filepath>`
