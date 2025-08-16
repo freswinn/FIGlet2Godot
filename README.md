@@ -17,6 +17,8 @@ More details to follow as this project progresses. Currently it is in a state th
 # FIGlet Installation
 FIGlet is a piece of software that has existed for decades in one form or another, created to generate large block text out of ASCII characters. See [http://www.figlet.org/](http://www.figlet.org) for details on FIGlet.
 
+You must have some version of FIGlet installed in order to use this plugin. On Windows, you will almost certainly have to use pyfiglet. On Linux, you can use FIGlet or pyfiglet.
+
 ## FIGlet: Linux
 Installing **FIGlet** on Linux ix very straightforward. You can probably find it on your distro's package manager, but you can also just type `sudo apt install figlet` in the console.
 
