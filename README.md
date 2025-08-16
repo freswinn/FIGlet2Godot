@@ -1,4 +1,11 @@
 # FIGlet2Godot
+
+## WARNING
+
+I am putting up the initial files, but the only feature that actually works at the moment is the FIGlet tab itself, and only with the Linux version of FIGlet. If you try this out prior to an actual release, you are proceeding at your own risk :)
+
+## Introduction
+
 This plugin's intention is to provide a streamlined way of creating and formatting output from FIGlet to create ASCII word art for insertion into your game project or scripts (for example, as header labels).
 
 ![](https://github.com/freswinn/FIGlet2Godot/blob/main/Preview.png)
