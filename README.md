@@ -25,7 +25,7 @@ Installing **FIGlet** on Linux ix very straightforward. You can probably find it
 The official website of this version of FIGlet is the same as the one listed above: [http://www.figlet.org/](http://www.figlet.org)
 
 ### Fonts on FIGlet:
-To find the fonts installed for FIGlet, go to `/usr/shared/figlet`
+By default, the fonts installed for FIGlet are at `/usr/shared/figlet`. If that doesn't work, type `figlet -I 2` to get the font folder that FIGlet is set up for.
 
 ## pyfiglet: Windows and Linux
 I know of two versions of FIGlet that work on Windows, but I've only had one work in such a way that I've managed to get is output through Godot's `OS.execute()` method. Therefore, I have to recommend pyfiglet for Windows.
