@@ -25,9 +25,9 @@ font_names = PackedStringArray("Monospace")
 
 [node name="Window" type="Window"]
 initial_position = 2
-size = Vector2i(640, 500)
+size = Vector2i(720, 500)
 transient = true
-min_size = Vector2i(640, 500)
+min_size = Vector2i(720, 500)
 script = ExtResource("1_r6fb3")
 
 [node name="m" type="MarginContainer" parent="."]
@@ -72,6 +72,7 @@ has been a change in the input.
 
 Make sure to visit the Configuration and Help tabs to make
 sure you set up the plugin correctly!"
+line_length_guidelines = Array[int]([100])
 
 [node name="h" type="HBoxContainer" parent="m/TabContainer/FIGlet/v"]
 layout_mode = 2
@@ -87,6 +88,11 @@ text = "Copy as Comment"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Just Copy"
+
+[node name="ForceUpdate" type="Button" parent="m/TabContainer/FIGlet/v/h"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Force Update/Refresh"
 
 [node name="Configuration" type="MarginContainer" parent="m/TabContainer"]
 layout_mode = 2
@@ -188,7 +194,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("SystemFont_r6fb3")
-text = "AaBbCc"
+text = "    _         ____  _      ____     
+   / \\   __ _| __ )| |__  / ___|___ 
+  / _ \\ / _` |  _ \\| '_ \\| |   / __|
+ / ___ \\ (_| | |_) | |_) | |__| (__ 
+/_/   \\_\\__,_|____/|_.__/ \\____\\___|
+                                    
+"
+autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -223,15 +236,17 @@ theme_override_fonts/font = SubResource("SystemFont_q6b7m")
 theme_override_font_sizes/font_size = 12
 alignment = 1
 selected = 0
-item_count = 4
+item_count = 5
 popup/item_0/text = "figlet (Linux)"
 popup/item_0/id = 0
 popup/item_1/text = "figlet (Windows)"
 popup/item_1/id = 1
-popup/item_2/text = "pyfiglet (Windows)"
+popup/item_2/text = "pyfiglet (Linux)"
 popup/item_2/id = 2
-popup/item_3/text = "Custom:"
+popup/item_3/text = "pyfiglet (Windows)"
 popup/item_3/id = 3
+popup/item_4/text = "Custom:"
+popup/item_4/id = 4
 
 [node name="ExecCustom" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4"]
 unique_name_in_owner = true
@@ -256,78 +271,110 @@ theme_override_fonts/font = SubResource("SystemFont_2l26h")
 theme_override_font_sizes/font_size = 12
 selected = 0
 item_count = 3
-popup/item_0/text = "Get list from dir; get dir from -I 2"
+popup/item_0/text = "(figlet) Get list from dir: figlet -I 2"
 popup/item_0/id = 0
-popup/item_1/text = "Use -l tag (pyfiglet)"
+popup/item_1/text = "(pyfiglet) Use -l tag"
 popup/item_1/id = 1
-popup/item_2/text = "Disable list, use custom tags only"
+popup/item_2/text = "(custom) Disable list, use custom tags only"
 popup/item_2/id = 2
+
+[node name="OpenFontFolder" type="Button" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Open Fonts Folder"
 
 [node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v"]
 custom_minimum_size = Vector2(456, 0)
 layout_mode = 2
+theme_override_constants/paragraph_spacing = 3
 theme_override_fonts/font = SubResource("SystemFont_v8u57")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 13
 text = "A note about getting fonts via custom tag:
 Tags are comma-separated. For some reason, -f,<fontname> works, but -f <fontname> doesn't -- despite including the value for other tags in the tag seemingly working for every other tag (ex. -w 100)."
 autowrap_mode = 3
 
-[node name="Customization" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer"]
+[node name="Customization" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 metadata/_tab_index = 1
 
-[node name="h" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
+[node name="v" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
 layout_mode = 2
 
-[node name="CullEmpty" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h"]
-unique_name_in_owner = true
+[node name="h" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Erase empty lines at the end"
+text = "Erase empty lines: "
 
-[node name="h2" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
+[node name="CullEmpty" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
+selected = 2
+item_count = 4
+popup/item_0/text = "No, thanks!"
+popup/item_0/id = 0
+popup/item_1/text = "Only at the end"
+popup/item_1/id = 1
+popup/item_2/text = "Both ends (start and end)"
+popup/item_2/id = 2
+popup/item_3/text = "Every empty line"
+popup/item_3/id = 3
 
-[node name="WidthTag" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h2"]
+[node name="h2" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="WidthTag" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Set width (in characters)"
 
-[node name="CharWidth" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h2"]
+[node name="CharWidth" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2"]
 unique_name_in_owner = true
 layout_mode = 2
-value = 80.0
+value = 100.0
 
-[node name="h3" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
+[node name="GetWidth" type="Button" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Get Width From Editor"
+
+[node name="h3" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h3"]
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Comment prefix format: "
 
-[node name="CommentPrefix" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h3"]
+[node name="CommentPrefix" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = SubResource("SystemFont_r156q")
 text = "# "
 
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
-text = "In the \"Comment prefix format,\" \\t inserts a tab"
+text = "To insert a tab, you can paste a Tab character in or just use \\t instead."
 horizontal_alignment = 2
 
-[node name="CustomTags" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
+[node name="CustomTags" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Custom Tags (comma-separated, overwrites font/width)"
+text = "Custom Tags (comma-separated, overwrites font/width settings)"
 
-[node name="TagInput" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
+[node name="TagInput" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -379,13 +426,19 @@ autostart = true
 
 [connection signal="text_changed" from="m/TabContainer/FIGlet/v/Input" to="." method="_on_input_text_changed"]
 [connection signal="pressed" from="m/TabContainer/FIGlet/v/h/CopyComment" to="." method="_on_copy_comment_pressed"]
+[connection signal="pressed" from="m/TabContainer/FIGlet/v/h/Copy" to="." method="_on_copy_pressed"]
+[connection signal="pressed" from="m/TabContainer/FIGlet/v/h/ForceUpdate" to="." method="_on_force_update_pressed"]
 [connection signal="toggled" from="m/TabContainer/Configuration/h/v/ChangeFont" to="." method="_on_change_font_toggled"]
+[connection signal="item_selected" from="m/TabContainer/Configuration/h/v/FontList" to="." method="_on_font_list_item_selected"]
 [connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4/Exec" to="." method="_on_exec_item_selected"]
 [connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4/ExecCustom" to="." method="_on_exec_custom_text_changed"]
 [connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/HBoxContainer/GetFontMethod" to="." method="_on_get_font_method_item_selected"]
-[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h/CullEmpty" to="." method="_on_cull_empty_toggled"]
-[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h2/WidthTag" to="." method="_on_width_tag_toggled"]
-[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h2/CharWidth" to="." method="_on_char_width_value_changed"]
-[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/h3/CommentPrefix" to="." method="_on_comment_prefix_text_changed"]
-[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/TagInput" to="." method="_on_tag_input_text_changed"]
+[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/OpenFontFolder" to="." method="_on_open_font_folder_pressed"]
+[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h/CullEmpty" to="." method="_on_cull_empty_item_selected"]
+[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2/WidthTag" to="." method="_on_width_tag_toggled"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2/CharWidth" to="." method="_on_char_width_value_changed"]
+[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2/GetWidth" to="." method="_on_get_width_pressed"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h3/CommentPrefix" to="." method="_on_comment_prefix_text_changed"]
+[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/CustomTags" to="." method="_on_custom_tags_toggled"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/TagInput" to="." method="_on_tag_input_text_changed"]
 [connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
