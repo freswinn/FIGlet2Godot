@@ -29,7 +29,7 @@ I know of two versions of FIGlet that work on Windows, but I've only had one wor
 
 To acquire and use pyfiglet in Windows, you must have an installation of Python 3 (I'm assuming you'll just wanna get the most recent one). Once installed, go to your Command Prompt and type `pip install pyfiglet` to install pyfiglet.
 
-To install it on Linux, you will have to use `sudo apt python3-pyfiglet` in the console.
+To install it on Linux, you will have to use `sudo apt install python3-pyfiglet` in the console.
 
 The official website of pyfiglet is [https://pypi.org/project/pyfiglet/](https://pypi.org/project/pyfiglet/).
 
