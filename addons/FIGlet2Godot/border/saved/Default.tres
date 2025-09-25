@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FigletBorderPattern" load_steps=2 format=3 uid="uid://iwx4w57bv2gq"]
+
+[ext_resource type="Script" uid="uid://n87jrd5q5r0v" path="res://addons/FIGlet2Godot/border/borders.gd" id="1_6o0vh"]
+
+[resource]
+script = ExtResource("1_6o0vh")
+pattern_name = "Default"
+pattern = "#"
+hspacing = Vector2i(4, 4)
+vspacing = Vector2i(1, 1)
+hfill = Vector2i(0, 0)
+vfill = Vector2i(1, 1)
+barberpole = 0
+metadata/_custom_type_script = "uid://n87jrd5q5r0v"

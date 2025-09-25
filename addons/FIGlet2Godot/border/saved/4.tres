@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FigletBorderPattern" load_steps=2 format=3 uid="uid://kfhuwax8i6wh"]
+
+[ext_resource type="Script" uid="uid://n87jrd5q5r0v" path="res://addons/FIGlet2Godot/border/borders.gd" id="1_idok5"]
+
+[resource]
+script = ExtResource("1_idok5")
+pattern_name = "Roses"
+pattern = "  @}`~~,~   @}~,~`~   @}-`,~~~
+~~,~`,{@   ~~~`,{@   ~~`,~,{@"
+hspacing = Vector2i(2, 2)
+vspacing = Vector2i(1, 1)
+hfill = Vector2i(16, 16)
+vfill = Vector2i(2, 2)
+barberpole = -3
+metadata/_custom_type_script = "uid://n87jrd5q5r0v"

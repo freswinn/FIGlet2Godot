@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bj4qbsmnlu03t"]
+[gd_scene load_steps=15 format=3 uid="uid://bj4qbsmnlu03t"]
 
 [ext_resource type="Script" uid="uid://ht28u01wslfv" path="res://addons/FIGlet2Godot/window.gd" id="1_r6fb3"]
 
 [sub_resource type="SystemFont" id="SystemFont_4fxxv"]
+font_names = PackedStringArray("Monospace")
+
+[sub_resource type="SystemFont" id="SystemFont_7qk0m"]
 font_names = PackedStringArray("Monospace")
 
 [sub_resource type="SystemFont" id="SystemFont_r6fb3"]
@@ -10,25 +13,49 @@ font_names = PackedStringArray("Monospace")
 
 [sub_resource type="SystemFont" id="SystemFont_q6b7m"]
 font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_mftxb"]
 font_names = PackedStringArray("Monospace")
 
 [sub_resource type="SystemFont" id="SystemFont_2l26h"]
 font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_v8u57"]
 font_names = PackedStringArray("Serif")
 
+[sub_resource type="SystemFont" id="SystemFont_fiw82"]
+font_names = PackedStringArray("Serif")
+
+[sub_resource type="FontVariation" id="FontVariation_bni78"]
+base_font = SubResource("SystemFont_fiw82")
+variation_embolden = 1.2
+
+[sub_resource type="SystemFont" id="SystemFont_tm7go"]
+font_names = PackedStringArray("Monospace")
+
 [sub_resource type="SystemFont" id="SystemFont_r156q"]
 font_names = PackedStringArray("Monospace")
 
+[sub_resource type="SystemFont" id="SystemFont_5dq3n"]
+font_names = PackedStringArray("Monospace")
+
+[sub_resource type="SystemFont" id="SystemFont_br1bj"]
+font_names = PackedStringArray("Monospace")
+
 [node name="Window" type="Window"]
+oversampling_override = 1.0
+title = "FIGlet2Godot"
 initial_position = 2
 size = Vector2i(720, 500)
 transient = true
 min_size = Vector2i(720, 500)
 script = ExtResource("1_r6fb3")
+
+[node name="UpdateTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
 
 [node name="m" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -43,10 +70,9 @@ theme_override_constants/margin_bottom = 4
 
 [node name="TabContainer" type="TabContainer" parent="m"]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 
 [node name="FIGlet" type="MarginContainer" parent="m/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -66,12 +92,15 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = SubResource("SystemFont_4fxxv")
-placeholder_text = "Note:
-The output updates every 1.5 seconds, and only if there
-has been a change in the input.
+placeholder_text = "Notes:
 
-Make sure to visit the Configuration and Help tabs to make
-sure you set up the plugin correctly!"
+- The output updates every 1.5 seconds, and only if there has been a
+change in the input.
+
+- Make sure to visit the Configuration and Help tabs!"
+editable = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
 line_length_guidelines = Array[int]([100])
 
 [node name="h" type="HBoxContainer" parent="m/TabContainer/FIGlet/v"]
@@ -82,19 +111,20 @@ alignment = 1
 [node name="CopyComment" type="Button" parent="m/TabContainer/FIGlet/v/h"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Copy as Comment"
+text = "# Copy as Comment "
 
 [node name="Copy" type="Button" parent="m/TabContainer/FIGlet/v/h"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Just Copy"
+text = " Just Copy "
 
 [node name="ForceUpdate" type="Button" parent="m/TabContainer/FIGlet/v/h"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Force Update/Refresh"
+text = " Force Update/Refresh "
 
 [node name="Configuration" type="MarginContainer" parent="m/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -110,80 +140,66 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="ChangeFont" type="CheckBox" parent="m/TabContainer/Configuration/h/v"]
+[node name="FontName" type="LineEdit" parent="m/TabContainer/Configuration/h/v"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Change Font"
+theme_override_fonts/font = SubResource("SystemFont_7qk0m")
+theme_override_font_sizes/font_size = 14
+text = "Terrace"
+placeholder_text = "<font name>"
+clear_button_enabled = true
+
+[node name="ApplyFont" type="Button" parent="m/TabContainer/Configuration/h/v"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Apply Font"
 
 [node name="FontList" type="ItemList" parent="m/TabContainer/Configuration/h/v"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-item_count = 58
-item_0/text = "646-ca"
-item_1/text = "646-ca2"
-item_2/text = "646-cn"
-item_3/text = "646-cu"
-item_4/text = "646-de"
-item_5/text = "646-dk"
-item_6/text = "646-es"
-item_7/text = "646-es2"
-item_8/text = "646-fr"
-item_9/text = "646-gb"
-item_10/text = "646-hu"
-item_11/text = "646-irv"
-item_12/text = "646-it"
-item_13/text = "646-jp"
-item_14/text = "646-kr"
-item_15/text = "646-no"
-item_16/text = "646-no2"
-item_17/text = "646-pt"
-item_18/text = "646-pt2"
-item_19/text = "646-se"
-item_20/text = "646-se2"
-item_21/text = "646-yu"
-item_22/text = "8859-2"
-item_23/text = "8859-3"
-item_24/text = "8859-4"
-item_25/text = "8859-5"
-item_26/text = "8859-7"
-item_27/text = "8859-8"
-item_28/text = "8859-9"
-item_29/text = "Terrace"
-item_30/text = "banner"
-item_31/text = "big"
-item_32/text = "block"
-item_33/text = "bubble"
-item_34/text = "digital"
-item_35/text = "frango"
-item_36/text = "hz"
-item_37/text = "ilhebrew"
-item_38/text = "ivrit"
-item_39/text = "jis0201"
-item_40/text = "koi8r"
-item_41/text = "lean"
-item_42/text = "mini"
-item_43/text = "mnemonic"
-item_44/text = "moscow"
-item_45/text = "script"
-item_46/text = "shadow"
-item_47/text = "slant"
-item_48/text = "small"
-item_49/text = "smscript"
-item_50/text = "smshadow"
-item_51/text = "smslant"
-item_52/text = "standard"
-item_53/text = "term"
-item_54/text = "upper"
-item_55/text = "ushebrew"
-item_56/text = "uskata"
-item_57/text = "utf8"
-
-[node name="SaveConfig" type="Button" parent="m/TabContainer/Configuration/h/v"]
-unique_name_in_owner = true
-self_modulate = Color(0, 1, 0, 1)
-layout_mode = 2
-text = "Save/Test Config"
+item_count = 41
+item_1/text = "Terrace"
+item_2/text = "ascii12"
+item_3/text = "ascii9"
+item_4/text = "banner"
+item_5/text = "big"
+item_6/text = "bigascii12"
+item_7/text = "bigascii9"
+item_8/text = "bigmono12"
+item_9/text = "bigmono9"
+item_10/text = "block"
+item_11/text = "bubble"
+item_12/text = "circle"
+item_13/text = "digital"
+item_14/text = "emboss"
+item_15/text = "emboss2"
+item_16/text = "future"
+item_17/text = "ivrit"
+item_18/text = "lean"
+item_19/text = "letter"
+item_20/text = "mini"
+item_21/text = "mnemonic"
+item_22/text = "mono12"
+item_23/text = "mono9"
+item_24/text = "pagga"
+item_25/text = "script"
+item_26/text = "shadow"
+item_27/text = "slant"
+item_28/text = "small"
+item_29/text = "smascii12"
+item_30/text = "smascii9"
+item_31/text = "smblock"
+item_32/text = "smbraille"
+item_33/text = "smmono12"
+item_34/text = "smmono9"
+item_35/text = "smscript"
+item_36/text = "smshadow"
+item_37/text = "smslant"
+item_38/text = "standard"
+item_39/text = "term"
+item_40/text = "wideterm"
 
 [node name="v2" type="VBoxContainer" parent="m/TabContainer/Configuration/h"]
 layout_mode = 2
@@ -194,24 +210,23 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = SubResource("SystemFont_r6fb3")
-text = "    _         ____  _      ____     
-   / \\   __ _| __ )| |__  / ___|___ 
-  / _ \\ / _` |  _ \\| '_ \\| |   / __|
- / ___ \\ (_| | |_) | |_) | |__| (__ 
-/_/   \\_\\__,_|____/|_.__/ \\____\\___|
-                                    
-"
+text = "   ░███               ░████████   ░██          ░██████             
+  ░██░██              ░██    ░██  ░██         ░██   ░██            
+ ░██  ░██   ░██████   ░██    ░██  ░████████  ░██         ░███████  
+░█████████       ░██  ░████████   ░██    ░██ ░██        ░██    ░██ 
+░██    ░██  ░███████  ░██     ░██ ░██    ░██ ░██        ░██        
+░██    ░██ ░██   ░██  ░██     ░██ ░███   ░██  ░██   ░██ ░██    ░██ 
+░██    ░██  ░█████░██ ░█████████  ░██░█████    ░██████   ░███████  "
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TabContainer" type="TabContainer" parent="m/TabContainer/Configuration/h/v2"]
+[node name="ConfigTabs" type="TabContainer" parent="m/TabContainer/Configuration/h/v2"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 0
 
-[node name="Setup" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer"]
-visible = false
+[node name="Setup" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -219,36 +234,31 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 metadata/_tab_index = 0
 
-[node name="v" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup"]
+[node name="v" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup"]
 layout_mode = 2
 
-[node name="h4" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v"]
+[node name="h4" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4"]
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4"]
 layout_mode = 2
 text = "FIGlet Exec: "
 
-[node name="Exec" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4"]
+[node name="Exec" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_q6b7m")
 theme_override_font_sizes/font_size = 12
 alignment = 1
-selected = 0
-item_count = 5
-popup/item_0/text = "figlet (Linux)"
+item_count = 3
+popup/item_0/text = "figlet"
 popup/item_0/id = 0
-popup/item_1/text = "figlet (Windows)"
-popup/item_1/id = 1
-popup/item_2/text = "pyfiglet (Linux)"
-popup/item_2/id = 2
-popup/item_3/text = "pyfiglet (Windows)"
-popup/item_3/id = 3
-popup/item_4/text = "Custom:"
-popup/item_4/id = 4
+popup/item_1/text = "pyfiglet"
+popup/item_1/id = 2
+popup/item_2/text = "Custom:"
+popup/item_2/id = 3
 
-[node name="ExecCustom" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4"]
+[node name="ExecCustom" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -256,44 +266,54 @@ theme_override_fonts/font = SubResource("SystemFont_mftxb")
 theme_override_font_sizes/font_size = 12
 editable = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v"]
+[node name="ExecCustomOK" type="Button" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "OK"
+
+[node name="h" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/HBoxContainer"]
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h"]
 layout_mode = 2
 text = "Font list method: "
 
-[node name="GetFontMethod" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/HBoxContainer"]
+[node name="FontListMethod" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = SubResource("SystemFont_2l26h")
 theme_override_font_sizes/font_size = 12
-selected = 0
+selected = 1
 item_count = 3
 popup/item_0/text = "(figlet) Get list from dir: figlet -I 2"
 popup/item_0/id = 0
 popup/item_1/text = "(pyfiglet) Use -l tag"
 popup/item_1/id = 1
-popup/item_2/text = "(custom) Disable list, use custom tags only"
+popup/item_2/text = "(custom) No font list, use custom tags only"
 popup/item_2/id = 2
 
-[node name="OpenFontFolder" type="Button" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Open Fonts Folder"
-
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v"]
+[node name="Label" type="RichTextLabel" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v"]
 custom_minimum_size = Vector2(456, 0)
 layout_mode = 2
-theme_override_constants/paragraph_spacing = 3
-theme_override_fonts/font = SubResource("SystemFont_v8u57")
-theme_override_font_sizes/font_size = 13
-text = "A note about getting fonts via custom tag:
-Tags are comma-separated. For some reason, -f,<fontname> works, but -f <fontname> doesn't -- despite including the value for other tags in the tag seemingly working for every other tag (ex. -w 100)."
-autowrap_mode = 3
+size_flags_vertical = 3
+theme_override_fonts/normal_font = SubResource("SystemFont_v8u57")
+theme_override_fonts/bold_font = SubResource("FontVariation_bni78")
+theme_override_fonts/mono_font = SubResource("SystemFont_tm7go")
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
+bbcode_enabled = true
+text = "[u]A note about setting a font via Custom Tag (on the next page):[/u]
+[bgcolor=darkblue][color=yellow][code]-f,<fontname>[/code][/color][/bgcolor] (with the comma) works fine.
+[code][bgcolor=darkblue][color=yellow]-f <fontname>[/color][/bgcolor][/code] (without the comma) does [b]not[/b] work.
+This does not seem to be true about any other tags. For example, both [bgcolor=darkblue][color=yellow][code]-w 100[/code][/color][/bgcolor] and [bgcolor=darkblue][color=yellow][code]-w,100[/code][/color][/bgcolor] work to set widths."
 
-[node name="Customization" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer"]
+[node name="Customization" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
@@ -301,20 +321,22 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 metadata/_tab_index = 1
 
-[node name="v" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization"]
+[node name="v" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization"]
 layout_mode = 2
 
-[node name="h" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+[node name="h" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h"]
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Erase empty lines: "
 
-[node name="CullEmpty" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h"]
+[node name="BlankLineCull" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
+alignment = 1
 selected = 2
 item_count = 4
 popup/item_0/text = "No, thanks!"
@@ -326,61 +348,289 @@ popup/item_2/id = 2
 popup/item_3/text = "Every empty line"
 popup/item_3/id = 3
 
-[node name="h2" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+[node name="h2" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="WidthTag" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2"]
+[node name="WidthToggle" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Set width (in characters)"
 
-[node name="CharWidth" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2"]
+[node name="Width" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h2"]
 unique_name_in_owner = true
 layout_mode = 2
-value = 100.0
+value = 80.0
+allow_greater = true
+alignment = 1
 
-[node name="GetWidth" type="Button" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2"]
+[node name="GetWidth" type="Button" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h2"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
+disabled = true
 text = "Get Width From Editor"
 
-[node name="h3" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+[node name="h3" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h3"]
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Comment prefix format: "
 
-[node name="CommentPrefix" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h3"]
+[node name="CommentPrefix" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = SubResource("SystemFont_r156q")
 text = "# "
+emoji_menu_enabled = false
+draw_control_chars = true
 
-[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "To insert a tab, you can paste a Tab character in or just use \\t instead."
 horizontal_alignment = 2
 
-[node name="CustomTags" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+[node name="CustomTagsToggle" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "Custom Tags (comma-separated, overwrites font/width settings)"
 
-[node name="TagInput" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v"]
+[node name="h4" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v"]
+layout_mode = 2
+
+[node name="CustomTags" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h4"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = SubResource("SystemFont_r156q")
-text = "-f,standard,-w 80"
 editable = false
+
+[node name="Border" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+metadata/_tab_index = 2
+
+[node name="v" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border"]
+layout_mode = 2
+
+[node name="h" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v"]
+layout_mode = 2
+
+[node name="v" type="VBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v"]
+layout_mode = 2
+
+[node name="BorderToggle" type="CheckBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Activate"
+
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Border Pattern:"
+horizontal_alignment = 2
+
+[node name="h" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Pattern Name:"
+
+[node name="PatternName" type="LineEdit" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+placeholder_text = "Used to save/delete"
+max_length = 32
+
+[node name="h2" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "Prefabs:"
+
+[node name="SavePrefab" type="Button" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Save"
+
+[node name="DeletePrefab" type="Button" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+disabled = true
+text = "Delete"
+
+[node name="Prefabs" type="OptionButton" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+alignment = 1
+selected = 0
+item_count = 6
+popup/item_0/text = "- new -"
+popup/item_0/id = 0
+popup/item_1/text = "Backward Slash"
+popup/item_1/id = 1
+popup/item_2/text = "Checkered"
+popup/item_2/id = 2
+popup/item_3/text = "Forward Slash"
+popup/item_3/id = 3
+popup/item_4/text = "Roses"
+popup/item_4/id = 4
+popup/item_5/text = "Default"
+popup/item_5/id = 5
+
+[node name="BorderPattern" type="TextEdit" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 86)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("SystemFont_5dq3n")
+text = "##  "
+placeholder_text = "See the Help tab for
+more information!"
+emoji_menu_enabled = false
+draw_control_chars = true
+draw_tabs = true
+draw_spaces = true
+
+[node name="h3" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3"]
+layout_mode = 2
+columns = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+layout_mode = 2
+
+[node name="SpacingUp" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="MarginContainer2" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="SpacingLeft" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+layout_mode = 2
+text = "Spacing"
+horizontal_alignment = 1
+
+[node name="SpacingRight" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+layout_mode = 2
+
+[node name="SpacingDown" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer"]
+layout_mode = 2
+
+[node name="GridContainer2" type="GridContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3"]
+layout_mode = 2
+columns = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+layout_mode = 2
+
+[node name="FillUp" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+layout_mode = 2
+
+[node name="FillLeft" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+layout_mode = 2
+text = "Fill"
+horizontal_alignment = 1
+
+[node name="FillRight" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+layout_mode = 2
+
+[node name="FillDown" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+select_all_on_focus = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2"]
+layout_mode = 2
+
+[node name="h2" type="HBoxContainer" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h2"]
+layout_mode = 2
+text = "Barberpole:"
+
+[node name="Barber" type="SpinBox" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h2"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -100.0
+value = 2.0
+rounded = true
+select_all_on_focus = true
+
+[node name="Label2" type="Label" parent="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "characters right (negative = left) every iteration."
 
 [node name="Help" type="MarginContainer" parent="m/TabContainer"]
 visible = false
@@ -401,44 +651,75 @@ layout_mode = 2
 layout_mode = 2
 text = "Topic: "
 
-[node name="OptionButton" type="OptionButton" parent="m/TabContainer/Help/v/h"]
+[node name="HelpTopic" type="OptionButton" parent="m/TabContainer/Help/v/h"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 selected = 0
 item_count = 4
-popup/item_0/text = "What are the prerequisites for using this plugin?"
+popup/item_0/text = "Prerequisites & Installing FIGlet"
 popup/item_0/id = 0
-popup/item_1/text = "Where do I get FIGlet?"
+popup/item_1/text = "Plugin Setup"
 popup/item_1/id = 1
-popup/item_2/text = "Why is the font list empty?"
+popup/item_2/text = "Font list is empty"
 popup/item_2/id = 2
-popup/item_3/text = "I'm getting errors!"
+popup/item_3/text = "Errors"
 popup/item_3/id = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="m/TabContainer/Help/v"]
+[node name="HelpText" type="RichTextLabel" parent="m/TabContainer/Help/v"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/mono_font = SubResource("SystemFont_br1bj")
+bbcode_enabled = true
+text = "	This plugin requires an installation of FIGlet or pyfiglet on your computer. (I recommend pyfiglet!)
 
-[node name="UpdateTimer" type="Timer" parent="."]
-wait_time = 1.5
-autostart = true
+	If you are on [b]Linux[/b], you can get FIGlet via [bgcolor=darkblue][color=yellow][code]sudo apt get figlet[/code][/color][/bgcolor] in the console, or you are likely able to get it through your distro's package manager. Alternately, you can get pyfiglet; you will need Python first. Then, just type [bgcolor=darkblue][color=yellow][code]sudo apt install python3-pyfiglet[/code][/color][/bgcolor] into the console.
 
+	If you are on [b]Windows[/b] or [b]Mac[/b], you are almost certainly going to need pyfiglet. You will need to install Python, and then make sure pip works in your command prompt. Then, in the command prompt, type [bgcolor=darkblue][color=yellow][code]pip install pyfiglet[/code][/color][/bgcolor]. That should be it!
+
+	Other versions and branches of FIGlet exist, and if you want to use those you will have to set this up yourself and make use of the Custom setting in the Configuration/Setup plugin tab.
+
+	You will still need to make sure this plugin is set up correctly based on what you have installed."
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="size_changed" from="." to="." method="_on_size_changed"]
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
+[connection signal="tab_selected" from="m/TabContainer" to="." method="_on_tab_container_tab_selected"]
 [connection signal="text_changed" from="m/TabContainer/FIGlet/v/Input" to="." method="_on_input_text_changed"]
 [connection signal="pressed" from="m/TabContainer/FIGlet/v/h/CopyComment" to="." method="_on_copy_comment_pressed"]
 [connection signal="pressed" from="m/TabContainer/FIGlet/v/h/Copy" to="." method="_on_copy_pressed"]
 [connection signal="pressed" from="m/TabContainer/FIGlet/v/h/ForceUpdate" to="." method="_on_force_update_pressed"]
-[connection signal="toggled" from="m/TabContainer/Configuration/h/v/ChangeFont" to="." method="_on_change_font_toggled"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v/FontName" to="." method="_on_font_name_text_changed"]
+[connection signal="text_submitted" from="m/TabContainer/Configuration/h/v/FontName" to="." method="_on_font_name_text_submitted"]
+[connection signal="pressed" from="m/TabContainer/Configuration/h/v/ApplyFont" to="." method="_on_apply_font_pressed"]
 [connection signal="item_selected" from="m/TabContainer/Configuration/h/v/FontList" to="." method="_on_font_list_item_selected"]
-[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4/Exec" to="." method="_on_exec_item_selected"]
-[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/h4/ExecCustom" to="." method="_on_exec_custom_text_changed"]
-[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/HBoxContainer/GetFontMethod" to="." method="_on_get_font_method_item_selected"]
-[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/TabContainer/Setup/v/OpenFontFolder" to="." method="_on_open_font_folder_pressed"]
-[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h/CullEmpty" to="." method="_on_cull_empty_item_selected"]
-[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2/WidthTag" to="." method="_on_width_tag_toggled"]
-[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2/CharWidth" to="." method="_on_char_width_value_changed"]
-[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h2/GetWidth" to="." method="_on_get_width_pressed"]
-[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/h3/CommentPrefix" to="." method="_on_comment_prefix_text_changed"]
-[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/CustomTags" to="." method="_on_custom_tags_toggled"]
-[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/TabContainer/Customization/v/TagInput" to="." method="_on_tag_input_text_changed"]
-[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
+[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4/Exec" to="." method="_on_exec_item_selected"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4/ExecCustom" to="." method="_on_exec_custom_text_changed"]
+[connection signal="text_submitted" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4/ExecCustom" to="." method="_on_exec_custom_text_submitted"]
+[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h4/ExecCustomOK" to="." method="_on_exec_custom_ok_pressed"]
+[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Setup/v/h/FontListMethod" to="." method="_on_font_list_method_item_selected"]
+[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h/BlankLineCull" to="." method="_on_blank_line_cull_item_selected"]
+[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h2/WidthToggle" to="." method="_on_width_toggle_toggled"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h2/Width" to="." method="_on_width_value_changed"]
+[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h2/GetWidth" to="." method="_on_get_width_pressed"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h3/CommentPrefix" to="." method="_on_comment_prefix_text_changed"]
+[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/CustomTagsToggle" to="." method="_on_custom_tags_toggle_toggled"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Customization/v/h4/CustomTags" to="." method="_on_custom_tags_text_changed"]
+[connection signal="toggled" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/HBoxContainer/BorderToggle" to="." method="_on_border_toggle_toggled"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h/PatternName" to="." method="_on_pattern_name_text_changed"]
+[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h2/SavePrefab" to="." method="_on_save_prefab_pressed"]
+[connection signal="pressed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/h2/DeletePrefab" to="." method="_on_delete_prefab_pressed"]
+[connection signal="item_selected" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/v/Prefabs" to="." method="_on_prefabs_item_selected"]
+[connection signal="text_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h/BorderPattern" to="." method="_on_border_pattern_text_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer/SpacingUp" to="." method="_on_spacing_up_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer/SpacingLeft" to="." method="_on_spacing_left_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer/SpacingRight" to="." method="_on_spacing_right_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer/SpacingDown" to="." method="_on_spacing_down_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2/FillUp" to="." method="_on_fill_up_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2/FillLeft" to="." method="_on_fill_left_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2/FillRight" to="." method="_on_fill_right_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h3/GridContainer2/FillDown" to="." method="_on_fill_down_value_changed"]
+[connection signal="value_changed" from="m/TabContainer/Configuration/h/v2/ConfigTabs/Border/v/h2/Barber" to="." method="_on_barber_value_changed"]
+[connection signal="item_selected" from="m/TabContainer/Help/v/h/HelpTopic" to="." method="_on_help_topic_item_selected"]

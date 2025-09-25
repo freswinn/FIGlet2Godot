@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FigletBorderPattern" load_steps=2 format=3 uid="uid://bqb1t77b0yp5j"]
+
+[ext_resource type="Script" uid="uid://n87jrd5q5r0v" path="res://addons/FIGlet2Godot/border/borders.gd" id="1_hj4tl"]
+
+[resource]
+script = ExtResource("1_hj4tl")
+pattern_name = "Backward Slash"
+pattern = "\\\\ "
+hspacing = Vector2i(1, 1)
+vspacing = Vector2i(1, 1)
+hfill = Vector2i(10, 10)
+vfill = Vector2i(2, 2)
+barberpole = 1
+metadata/_custom_type_script = "uid://n87jrd5q5r0v"
